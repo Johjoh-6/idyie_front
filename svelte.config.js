@@ -12,6 +12,13 @@ const config = {
 		// If your environment is not supported or you settled on a specific environment, switch out the adapter.
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter()
+	},
+	packages: {
+		// This allows us to use the @sveltejs/adapter-node adapter
+		files: {
+			// This is the path to the directory that contains your package.json
+			lib: 'src/lib',
+		}
 	}
 };
 
