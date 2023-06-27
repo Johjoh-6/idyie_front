@@ -14,7 +14,7 @@ export type CommentGet = {
 		username: string;
 		avatar?: string;
 	};
-    res?: Comment[];
+    res?: CommentGet[];
 } & Comment;
 
 export type CommentEdit = {
