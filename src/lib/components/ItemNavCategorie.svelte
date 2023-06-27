@@ -29,19 +29,17 @@
   }
   a {
     text-decoration: none;
-    color: var(--text_light);
-    & {
-      border-bottom: solid 1px var(--box_light);
-    }
-    &:hover {
-      background-color: var(--c_primary);
-      color: var(--c_grey);
-    }
+    color: var(--text_light); 
+    border-bottom: solid 1px var(--box_light);
     li {
-      cursor: pointer;
-      padding: 10px;
+        cursor: pointer;
+        padding: 10px;
     }
-  }
+}
+a:hover {
+  background-color: var(--c_primary);
+  color: var(--c_grey);
+}
   .jump {
     color: var(--c_primary);
     margin-right: 5px;
