@@ -43,7 +43,7 @@
                <a href="/" on:click={handleMenuItemClick}><li>Accueil</li></a>
                {#if $page.data.user}
                <a href="/" on:click={handleMenuItemClick}><li>Crée un tutoriel</li></a>
-               <form class="logout" method="POST" action="/profile?/logout" use:enhance><button type="submit">Déconection</button></form>
+               <form class="logout" method="POST" action="/profile?/logout" use:enhance={handleMenuItemClick}><button type="submit">Déconection</button></form>
                {:else}
                <a href="/profile" on:click={handleMenuItemClick}><li>Se connecter</li></a>
                <a href="/register" on:click={handleMenuItemClick}><li>S'inscrire</li></a>
