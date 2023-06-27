@@ -1,5 +1,12 @@
-<h1>Home</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+    import BoxTutorial from "$lib/components/BoxTutorial.svelte";
+import type { PageData } from "./$types";
 
-<a href="/login">Login</a>
-<a href="/register">register</a>
+    export let data: PageData;
+    console.table(data.tutorials);
+</script>
+<h1>Home</h1>
+
+{#each data.tutorials as tuto}
+    <BoxTutorial {tuto} />
+{/each}
