@@ -1,17 +1,17 @@
 import type { PageServerLoad } from './$types';
-import { API_URL } from '$env/static/private';
 import type { Tutorial } from '$lib/model/tutorial';
-import type { CommentGet } from '$lib/model/comments';
+import { getCommentsByTutorial } from '$lib/servers/comments';
+import { error } from '@sveltejs/kit';
 
 export const load = (async ({parent, params}) => {
     const {tutorials} = await parent();
-    const tutorial: Tutorial = tutorials.find((t: Tutorial) => t.id === parseInt(params.slug));
+    const tutorial: Tutorial | undefined = tutorials.find((t: Tutorial) => t.id === parseInt(params.slug)) ;
 
-    const response = await fetch(API_URL + 'api/comment/tutorial/' + tutorial.id, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-    });
-    const comments: CommentGet[] = await response.json();
+    if(!tutorial) { 
+        throw error(404, 'Tutorial not found');
+    }
+    const comments = await getCommentsByTutorial(tutorial.id);
+
     return {
         tutorial: tutorial,
         comments: comments
