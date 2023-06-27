@@ -1,7 +1,7 @@
 export type Category = {
 	id: number;
     name: string;
-    sub?: Category[];
+    sub: Category[] | [];
 };
 
 export type CategoryCreate = {
