@@ -17,8 +17,8 @@ const getCategory = async (id: number): Promise<Category> => {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     });
-    const category: Category = await response.json();
-    return category;
+    const category = await response.json();
+    return category[0];
 }
 
 const createCategory = async (name: string, parent?: number): Promise<Category> => {

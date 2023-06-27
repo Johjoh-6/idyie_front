@@ -28,8 +28,7 @@ const getTutorial = async (id: number): Promise<Tutorial> => {
  */
 const addView = async (id: number): Promise<Success | Error> => {
     const response = await fetch(API_URL + 'api/tutorial/' + id + '/view', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'GET',
         credentials: 'include'
     });
     const tutorial: Success | Error = await response.json();
