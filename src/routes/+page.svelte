@@ -3,7 +3,6 @@
 import type { PageData } from "./$types";
 
     export let data: PageData;
-    console.table(data.tutorials);
 </script>
 <h1>Home</h1>
 
