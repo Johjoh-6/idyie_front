@@ -1,5 +1,6 @@
 <script lang="ts">
-    import type { PageData } from './$types';
+    import CommentTree from '$lib/components/CommentTree.svelte';
+import type { PageData } from './$types';
     
     export let data: PageData;
     const tuto = data.tutorial;
@@ -11,6 +12,7 @@
 <div>
     <p>{tuto.user.username}</p>
     <p>{tuto.categorie.name}</p>
+    <p>{tuto.view_count}</p>
     <p>{tuto.avg_rating}</p>
     <p>{tuto.date}</p>
 </div>
@@ -19,12 +21,11 @@
 </section>
 <section>
     <h2>Comments</h2>
+    <ul>
     {#each comments as comment}
-        <div>
-            <p>{comment.content}</p>
-            <p>{comment.date}</p>
-        </div>
+       <CommentTree {comment} />
     {:else}
-        <p>No comments yet</p>
+        <li>No comments yet</li>
     {/each}
+    </ul>
 </section>
