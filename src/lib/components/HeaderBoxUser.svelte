@@ -4,7 +4,6 @@
     import Icon from './Icon.svelte';
     import { header } from '$lib/store/header';
   import DialogHeader from './DialogHeader.svelte';
-    let dialog: HTMLDialogElement;
 
    
     const openBox = () => {
