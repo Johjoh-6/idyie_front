@@ -2,6 +2,8 @@
     import Icon from './Icon.svelte';
     import { header } from '$lib/store/header';
   import DialogHeader from './DialogHeader.svelte';
+  import { page } from '$app/stores';
+  import ItemNavCategorie from './ItemNavCategorie.svelte';
     
     $: show = $header.categories;
     
@@ -14,7 +16,7 @@
         })
     }
     
-
+    let categories = $page.data.categories;
 </script>
 
 <!-- svelte-ignore a11y-autofocus -->
@@ -26,10 +28,9 @@
 <DialogHeader bind:show={show}>
     <div class="show_menu" >
         <ul>
-            <a href="/"><li>cat 1</li></a>
-            <a href="/"><li>cat 1</li></a>
-            <a href="/"><li>cat 1</li></a>
-            <a href="/"><li>cat 1</li></a>
+            {#each categories as cat}
+                <ItemNavCategorie categorie={cat}/>
+            {/each}
         </ul>
     </div>
 </DialogHeader>
@@ -57,28 +58,6 @@
             height: 100%;
             box-shadow: var(--drop_shadow);
             overflow: hidden;
-            ul{
-                list-style: none;
-                padding: 0;
-                margin: 0;
-                display: flex;
-                flex-direction: column;
-                a{
-                    text-decoration: none;
-                    color: var(--text_light);
-                    &:not(:last-child){
-                        border-bottom: solid 1px var(--box_light);
-                    }
-                    &:hover{
-                        background-color: var(--c_primary);
-                        color: var(--c_grey);
-                    }
-                    li{
-                        cursor: pointer;
-                        padding: 10px;
-                    }
-                }
-            }
         }
 
 </style>
