@@ -27,7 +27,7 @@ export const actions: Actions = {
         const cookieName = authToken.substring(0, authToken.indexOf('='));
         const cookieValue = authToken.substring(authToken.indexOf('=') + 1, authToken.indexOf(';'));
     
-         cookies.set(cookieName, cookieValue, { path: '/', httpOnly: true});
+         cookies.set(cookieName, cookieValue, { path: '/', httpOnly: true, maxAge: 60 * 60 * 24 * 30});
 
         throw redirect(307, '/profile');
     }
