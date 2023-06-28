@@ -1,6 +1,8 @@
+import { page } from "$app/stores";
 import { API_URL } from "$env/static/private";
 import type { Error, Success } from "$lib/model/api";
 import type { Tutorial, TutorialEdit, TutorialResponse } from "$lib/model/tutorial";
+import { get } from "svelte/store";
 
 
 const getAllTutorial = async (): Promise<Tutorial[]> => {
@@ -27,9 +29,13 @@ const getTutorial = async (id: number): Promise<Tutorial> => {
  * @returns {Success | Error} if the view is added
  */
 const addView = async (id: number): Promise<Success | Error> => {
+    const token = get(page).data.user.accessToken;
     const response = await fetch(API_URL + 'api/tutorial/' + id + '/view', {
         method: 'GET',
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
     });
     const tutorial: Success | Error = await response.json();
     return tutorial;
@@ -50,9 +56,11 @@ const getTutorialByCategory = async (cat: number): Promise<Tutorial[]> => {
 }
 
 const createTutorial = async (tutoCreate: TutorialEdit): Promise<TutorialResponse> => {
+    const token = get(page).data.user.accessToken;
     const response = await fetch(API_URL + 'api/tutorial', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` },
         body: JSON.stringify(tutoCreate),
         credentials: 'include'
     });
@@ -61,9 +69,11 @@ const createTutorial = async (tutoCreate: TutorialEdit): Promise<TutorialRespons
 }
 
 const updateTutorial = async (id: number, tutoUpdate: TutorialEdit): Promise<TutorialResponse> => {
+    const token = get(page).data.user.accessToken;
     const response = await fetch(API_URL + 'api/tutorial/' + id, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 
+        'Authorization': `Bearer ${token}` },
         body: JSON.stringify(tutoUpdate),
         credentials: 'include'
     });
@@ -72,9 +82,11 @@ const updateTutorial = async (id: number, tutoUpdate: TutorialEdit): Promise<Tut
 }
 
 const deleteTutorial = async (id: number): Promise<Success | Error> => {
+    const token = get(page).data.user.accessToken;
     const response = await fetch(API_URL + 'api/tutorial/' + id, {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 
+        'Authorization': `Bearer ${token}`},
         credentials: 'include'
     });
     const tutorial = await response.json();

@@ -1,7 +1,7 @@
 export type UserToken = {
 	role: string;
 	username: string;
-	id: string;
+	id: number;
 	accessToken: string;
 };
 
