@@ -1,3 +1,4 @@
+import { userToken } from '$lib/store/userToken';
 import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
@@ -6,6 +7,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.user = decript;
 	if (event.locals.user) {
 		event.locals.user.accessToken = jwt || '';
+		userToken.set(jwt ?? '');
 	}
 	const response = await resolve(event);
 	return response;
