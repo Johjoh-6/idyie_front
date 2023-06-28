@@ -15,7 +15,6 @@ export type Tutorial = {
 		username: string;
 		avatar?: string;
 	};
-	date: string;
 	created_at: string;
 };
 

@@ -28,14 +28,13 @@ const getTutorial = async (id: number): Promise<Tutorial> => {
  * @param id of the tutorial
  * @returns {Success | Error} if the view is added
  */
-const addView = async (id: number): Promise<Success | Error> => {
-    const token = get(page).data.user.accessToken;
+const addView = async (id: number, token: string): Promise<Success | Error> => {
     const response = await fetch(API_URL + 'api/tutorial/' + id + '/view', {
         method: 'GET',
-        credentials: 'include',
         headers: {
             'Authorization': `Bearer ${token}`
-        }
+        },
+        credentials: 'include',
     });
     const tutorial: Success | Error = await response.json();
     return tutorial;
