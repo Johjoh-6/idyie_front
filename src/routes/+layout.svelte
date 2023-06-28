@@ -3,7 +3,7 @@
 import HeaderBoxUser from '$lib/components/HeaderBoxUser.svelte';
   import SearchBar from '$lib/components/SearchBar.svelte';
 import type { LayoutData } from './$types';
-    export let data: LayoutData;
+    // export let data: LayoutData;
 
    
 </script>
@@ -29,7 +29,9 @@ import type { LayoutData } from './$types';
     </div>
 </header>
 
-<slot />
+<main>
+    <slot />
+</main>
 
 <style>
     header{
@@ -39,6 +41,8 @@ import type { LayoutData } from './$types';
         padding: 10px;
         border-bottom: 2px solid var(--box_light);
         gap: 15px;
+        width: var(--width);
+        margin-inline: auto;
     }
     a{
         height: 60px;
@@ -60,4 +64,9 @@ import type { LayoutData } from './$types';
     }
   }
 
+  main{
+      width: var(--width);
+      margin-inline: auto;
+      background-color: var(--bg_light);
+  }
 </style>
