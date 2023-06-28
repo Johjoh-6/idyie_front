@@ -20,7 +20,7 @@ export type CommentGet = {
 export type CommentEdit = {
 	content: string;
     id_tutorial?: number;
-    id_comment_parent?: number;
+    parent_id?: number;
 };
 
 export type CommentResponse = {
