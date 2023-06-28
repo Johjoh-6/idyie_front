@@ -1,23 +1,13 @@
 <script lang="ts">
   import type { CommentGet } from "$lib/model/comments";
-  import { transformDate } from "$lib/utils/transformDate";
+  import Comment from "./Comment.svelte";
   
     export let comment: CommentGet;
+    export let userId: number;
   </script>
   
-  <li>
-    <div class="user_comment">
-        <img src="{comment.user.avatar}" alt="photo {comment.user.username}">
-        <p class="name_user">
-            {comment.user.username}
-        </p>
-        <p class="date_comment">
-            {transformDate(comment.date)}
-        </p>
-    </div>
-    <p class="comment_content">
-        {comment.content}
-    </p>
+<li>
+   <Comment {comment} {userId}/>
 </li>
   {#if comment.res && comment.res.length > 0}
     <ul>
@@ -27,22 +17,9 @@
         {:else}
           <li>
             <p class="icons">
-                └
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.00014 13.9999L5 5.00003L7 5L7.00011 11.9999L14.5862 12V6.58581L21.0004 13L14.5862 19.4142L14.5862 14L5.00014 13.9999Z"></path></svg>
             </p>
-            <div class="jump">
-                <div class="user_comment">
-                    <img src="{comment.user.avatar}" alt="photo {comment.user.username}">
-                    <p class="name_user">
-                        {comment.user.username}
-                    </p>
-                    <p class="date_comment">
-                        {transformDate(comment.date)}
-                    </p>
-                </div>
-                <p class="comment_content">
-                    {comment.content}
-                </p>
-            </div>
+                <Comment comment={com} {userId}/>
         </li>
         {/if}
       {/each}
@@ -52,49 +29,35 @@
   <style lang="scss">
     ul {
       list-style: none;
-      padding: 0;
-      margin: 0;
       display: flex;
       flex-direction: column;
+      @media screen and (min-width: 768px) {
+        gap: 10px;
+      }
     }
-      li , .jump {
+      li {
           cursor: pointer; 
           padding: 10px;
             border-bottom: var(--c_grey) solid 1px;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             gap: 5px;
-          .user_comment{
-                display: flex;
-                width: 100%;
-                align-items: center;
-                gap: 5px;
-                img{
-                    width: 25px;
-                    height: 25px;
-                    border-radius: var(--br_round);
-                    margin-right: 10px;
-                }
-                .name_user{
-                    font-weight: bold;
-                    flex-grow: 2;
-                }
-                .date_comment{
-                    font-weight: normal;
-                    font-size: 0.8rem;
-                    justify-self: flex-end;
-                }
-          }
-          .comment_content{
-                width: 100%;
-                padding: 0 5px;
-          }
+            align-items: center;
+            @media screen and (min-width: 768px) {
+              width: 80%;
+              margin-inline: auto;
+              border: solid 1px var(--box_light);
+              border-radius: var(--br_sm);
+              background-color: var(--box_light);
+              box-shadow: var(--drop_shadow);
+            }
       }
     .icons {
-          font-size: 1.8rem;
-          padding: 5px;
-        margin-right: 5px;
-          color: var(--c_primary);
+          svg{
+            width: 1.8rem;
+            height: 1.8rem;
+            fill: var(--c_primary);
+          }
     }
   </style>
   
