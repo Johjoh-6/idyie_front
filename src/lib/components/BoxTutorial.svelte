@@ -1,11 +1,10 @@
 <script lang='ts'>
   import type { Tutorial } from "$lib/model/tutorial";
 
-
     export let tuto : Tutorial;
 </script>
 
-<a href="/{tuto.id}">
+<a href="/{tuto.id}" >
 <div class="box">
     <div class="user_info">
         <img src="{tuto.user.avatar ?? ""}" alt="user">
@@ -25,7 +24,7 @@
             <div class="content">
                 <p>{@html tuto.content}</p>
             </div>
-            <p class="date">{tuto.date}</p>
+            <p class="date">{tuto.created_at}</p>
         </div>
     </div>
     
