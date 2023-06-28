@@ -1,7 +1,8 @@
-import { page } from "$app/stores";
+
 import { API_URL } from "$env/static/private";
 import type { Error, Success } from "$lib/model/api";
 import type { CommentEdit, CommentGet, CommentResponse } from "$lib/model/comments";
+import { userToken } from "$lib/store/userToken";
 import { get } from "svelte/store";
 
 
@@ -35,7 +36,7 @@ const getCommentsByTutorial = async (id: number): Promise<CommentGet[]> => {
 }
 
 const createComment = async (commentCreate: CommentEdit): Promise<CommentResponse | Error> => {
-    const token = get(page).data.user.accessToken;
+    const token = get(userToken);
     const response = await fetch(API_URL + 'api/comment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json',
@@ -49,7 +50,7 @@ const createComment = async (commentCreate: CommentEdit): Promise<CommentRespons
 }
 
 const updateComment = async (id: number, commentUpdate: CommentEdit): Promise<CommentResponse  | Error> => {
-    const token = get(page).data.user.accessToken;
+    const token = get(userToken);
     const response = await fetch(API_URL + 'api/comment/' + id, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json',
@@ -62,7 +63,7 @@ const updateComment = async (id: number, commentUpdate: CommentEdit): Promise<Co
 }
 
 const deleteComment = async (id: number): Promise<Success | Error> => {
-    const token = get(page).data.user.accessToken;
+    const token = get(userToken);
     const response = await fetch(API_URL + 'api/comment/' + id, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json',
