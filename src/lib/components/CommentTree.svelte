@@ -31,9 +31,7 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      @media screen and (min-width: 768px) {
-        gap: 10px;
-      }
+      gap: 10px;
     }
       li {
           cursor: pointer; 
@@ -43,14 +41,12 @@
             flex-direction: row;
             gap: 5px;
             align-items: center;
-            @media screen and (min-width: 768px) {
-              width: 80%;
-              margin-inline: auto;
-              border: solid 1px var(--box_light);
-              border-radius: var(--br_sm);
-              background-color: var(--box_light);
-              box-shadow: var(--drop_shadow);
-            }
+            width: clamp(300px, 50vw, 700px);
+            margin-inline: auto;
+            border: solid 1px var(--box_light);
+            border-radius: var(--br_sm);
+            background-color: var(--box_light);
+            box-shadow: var(--drop_shadow);
       }
     .icons {
           svg{
