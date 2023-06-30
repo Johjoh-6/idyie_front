@@ -5,7 +5,7 @@ export type Tutorial = {
 	content: string;
 	view_count: number;
 	avg_rating: number;
-	duration: number;
+	durate: number;
 	categorie: {
 		id: number;
 		name: string;
@@ -21,7 +21,7 @@ export type Tutorial = {
 export type TutorialEdit = {
 	title: string;
 	content: string;
-	duration: number;
+	durate: number;
 	id_category: number;
 };
 

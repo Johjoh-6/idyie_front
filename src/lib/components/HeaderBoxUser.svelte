@@ -41,13 +41,16 @@
            <ul>
                <a href="/" on:click={handleMenuItemClick}><li>Accueil</li></a>
                {#if $page.data.user}
-               <a href="/" on:click={handleMenuItemClick}><li>Crée un tutoriel</li></a>
+                    {#if $page.data.user.role !== "USER"}
+                        <a href="/add-tutoriel" on:click={handleMenuItemClick}><li>Crée un tutoriel</li></a>
+                    {/if}
+                <a href="/profile" on:click={handleMenuItemClick}><li>Profil</li></a>
                {#if $page.data.user.role == "admin" || $page.data.user.role == "moderator"}
                 <a href="/admin" on:click={handleMenuItemClick}><li>Admin</li></a>
                 {/if}
-               <form class="logout" method="POST" action="/profile?/logout" use:enhance={handleMenuItemClick}><button type="submit">Déconection</button></form>
+               <form class="logout" method="POST" action="/logout" use:enhance={handleMenuItemClick}><button type="submit">Déconection</button></form>
                {:else}
-               <a href="/profile" on:click={handleMenuItemClick}><li>Se connecter</li></a>
+               <a href="/login" on:click={handleMenuItemClick}><li>Se connecter</li></a>
                <a href="/register" on:click={handleMenuItemClick}><li>S'inscrire</li></a>
                {/if}
            </ul>

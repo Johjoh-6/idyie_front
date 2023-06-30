@@ -9,6 +9,8 @@
     <h1>Crée un compte</h1>
     <form method="POST" use:enhance>
         {#if form?.missing}<p class="error">{form.missing}</p>{/if}
+        <label for="username">Nom d'utilisateur</label>
+        <input name="username" type="text" placeholder="username" />
         <label for="email">Email : </label>
         <input name="email" type="email" placeholder="test@gmail.com"/>
         <label for="password">Mot de passe : </label>

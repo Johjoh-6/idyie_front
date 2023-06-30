@@ -11,6 +11,7 @@ export const load: PageServerLoad = ({ locals }) => {
 export const actions: Actions = {
     default: async ({ cookies, request }) => {
         const data = await request.formData();
+        const username = data.get('username') as string;
         const email = data.get('email') as string;
         const password = data.get('password') as string;
         const confirm = data.get('password_confirm') as string;
@@ -22,7 +23,7 @@ export const actions: Actions = {
         const response = await fetch(API_URL + 'api/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ email, password, username }),
           });
         
         const authToken = response.headers.get('set-cookie');

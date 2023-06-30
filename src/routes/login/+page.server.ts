@@ -1,6 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
-import { API_URL } from '$env/static/private';
+import { login } from '$lib/servers/user';
 
 
 
@@ -9,18 +9,14 @@ export const load: PageServerLoad = ({ locals }) => {
 };
 
 export const actions: Actions = {
-    default: async ({ cookies, request }) => {
+    default: async ({ cookies, request, url }) => {
         const data = await request.formData();
         const email = data.get('email') as string;
         const password = data.get('password') as string;
 
         if(!email || !password) return fail(400, { email, password, missing: 'Email or password are missing.' });
 
-        const response = await fetch(API_URL + 'api/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-          });
+       const response = await login(email, password);
         
         const authToken = response.headers.get('set-cookie');
         if(!authToken) throw new Error('Login failed');
@@ -28,7 +24,7 @@ export const actions: Actions = {
         const cookieValue = authToken.substring(authToken.indexOf('=') + 1, authToken.indexOf(';'));
     
          cookies.set(cookieName, cookieValue, { path: '/', httpOnly: true, maxAge: 60 * 60 * 24 * 30});
-
-        throw redirect(307, '/profile');
+ 
+        throw redirect(303, url.searchParams.get('redirectTo') ?? '/profile');
     }
 };

@@ -2,11 +2,12 @@ import { page } from "$app/stores";
 import { API_URL } from "$env/static/private";
 import type { Error, Success } from "$lib/model/api";
 import type { Tutorial, TutorialEdit, TutorialResponse } from "$lib/model/tutorial";
+import { userToken } from "$lib/store/userToken";
 import { get } from "svelte/store";
 
 
 const getAllTutorial = async (): Promise<Tutorial[]> => {
-    const response = await fetch(API_URL + 'api/tutorial', {
+    const response = await fetch(API_URL + 'api/tutorial?draft=true', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     });
@@ -14,13 +15,24 @@ const getAllTutorial = async (): Promise<Tutorial[]> => {
     return tutorials;
 }
 
-const getTutorial = async (id: number): Promise<Tutorial> => {
+const getTutorial = async (id: number): Promise<Tutorial | Error> => {
     const response = await fetch(API_URL + 'api/tutorial/' + id, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     });
-    const tutorial: Tutorial = await response.json();
-    return tutorial;
+    const tutorial: Tutorial[] = await response.json();
+    return tutorial[0];
+}
+
+const getTutorialByUser = async (id: number): Promise<Tutorial[]> => {
+    const token = get(userToken);
+    const response = await fetch(API_URL + 'api/tutorial/user/' + id, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`}
+    });
+    const tutorials: Tutorial[] = await response.json();
+    return tutorials;
 }
 
 /**
@@ -48,14 +60,15 @@ const addView = async (id: number, token: string): Promise<Success | Error> => {
 const getTutorialByCategory = async (cat: number): Promise<Tutorial[]> => {
     const response = await fetch(API_URL + 'api/tutorial/category/' + cat, {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
+
     });
     const tutorials: Tutorial[] = await response.json();
     return tutorials;
 }
 
 const createTutorial = async (tutoCreate: TutorialEdit): Promise<TutorialResponse> => {
-    const token = get(page).data.user.accessToken;
+    const token = get(userToken);
     const response = await fetch(API_URL + 'api/tutorial', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json',
@@ -68,7 +81,7 @@ const createTutorial = async (tutoCreate: TutorialEdit): Promise<TutorialRespons
 }
 
 const updateTutorial = async (id: number, tutoUpdate: TutorialEdit): Promise<TutorialResponse> => {
-    const token = get(page).data.user.accessToken;
+    const token = get(userToken);
     const response = await fetch(API_URL + 'api/tutorial/' + id, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 
@@ -81,7 +94,7 @@ const updateTutorial = async (id: number, tutoUpdate: TutorialEdit): Promise<Tut
 }
 
 const deleteTutorial = async (id: number): Promise<Success | Error> => {
-    const token = get(page).data.user.accessToken;
+    const token = get(userToken);
     const response = await fetch(API_URL + 'api/tutorial/' + id, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json', 
@@ -92,4 +105,4 @@ const deleteTutorial = async (id: number): Promise<Success | Error> => {
     return tutorial;
 }
 
-export { getAllTutorial, getTutorial, addView, getTutorialByCategory, createTutorial, updateTutorial, deleteTutorial };
+export { getAllTutorial, getTutorial, addView, getTutorialByCategory, createTutorial, updateTutorial, deleteTutorial, getTutorialByUser };
