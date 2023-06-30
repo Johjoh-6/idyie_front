@@ -23,5 +23,8 @@
   "description": "Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).",
   "main": "svelte.config.js",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@tinymce/tinymce-svelte": "^1.0.1"
+  }
 }
