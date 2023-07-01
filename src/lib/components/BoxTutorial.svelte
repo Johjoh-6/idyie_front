@@ -65,12 +65,12 @@ let { date, time} = transformDate(tuto.created_at);
       "date date comment";
       box-shadow: var(--drop_shadow);
       @media screen and (min-width: 768px) {
-        grid-template-columns: 35px 2fr 1fr;
+        grid-template-columns: 1fr 5fr 1fr;
         grid-template-areas:
-          "avatar username rating"
-          "title title categorie"
+          "avatar username date"
+          "title title ."
           "content content content"
-          "date date comment";
+          "categorie rating comment";
           border-radius: var(--br_sm);
       }
 
@@ -104,6 +104,23 @@ let { date, time} = transformDate(tuto.created_at);
                 fill: var(--c_primary);
                 z-index: 1;
                 }
+            }
+            @media screen and (min-width: 768px) {
+                width: 50px;
+                height: 50px;
+                img{
+                    width: 50px;
+                    height: 50px;
+                }
+                .no_avatar{
+                    width: 50px;
+                    height: 50px;
+                    svg{
+                        width: 30px;
+                        height: 30px;
+                    }
+                }
+              
             }
     }
     .user_name {
@@ -186,6 +203,8 @@ let { date, time} = transformDate(tuto.created_at);
       grid-area: date;
       font-weight: 400;
       font-size: clamp(0.8rem, 1.5vw, 1rem);  
+      white-space: nowrap;
+      align-self: center;
     }
 
   }
