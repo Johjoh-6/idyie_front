@@ -34,6 +34,17 @@ import type { LayoutData } from './$types';
 </main>
 
 <style>
+    :global(html, body){
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+        font-size: 16px;
+        color: var(--c_dark);
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
     header{
         display: flex;
         justify-content: space-between;
@@ -54,7 +65,9 @@ import type { LayoutData } from './$types';
         gap: 15px;
     }
     .show_btn {
-    background-color: lightblue;
+    background-color: var(--c_primary);
+    color: var(--c_white);
+    border-radius: var(--br_m);
     padding: 1rem;
   }
 
@@ -68,5 +81,6 @@ import type { LayoutData } from './$types';
       width: var(--width);
       margin-inline: auto;
       background-color: var(--bg_light);
+      flex-grow: 2;
   }
 </style>
