@@ -4,6 +4,7 @@ export type Tutorial = {
 	title: string;
 	content: string;
 	view_count: number;
+	comment_count?: number;
 	avg_rating: number;
 	durate: number;
 	categorie: {
