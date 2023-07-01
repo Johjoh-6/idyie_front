@@ -9,7 +9,7 @@ export const load = (async ({locals}) => {
     return {
         user: locals.user,
         tutorials: tutorials,
-        categories: categories
+        categories: categories,
     };
 }) satisfies LayoutServerLoad;
 
