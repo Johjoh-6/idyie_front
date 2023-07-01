@@ -17,6 +17,7 @@ export type Tutorial = {
 		avatar?: string;
 	};
 	created_at: string;
+	draft?: boolean;
 };
 
 export type TutorialEdit = {

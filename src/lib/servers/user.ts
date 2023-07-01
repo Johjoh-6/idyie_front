@@ -56,4 +56,15 @@ const updateUser = async (user: User): Promise<User> => {
     return response.json();
 }
 
-export { login, logout, register, getUserById, updateUser };
+const getAllUsers = async (): Promise<User[]> => {
+    const token = get(userToken);
+    const response = await fetch(API_URL + 'api/users', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` },
+        credentials: 'include'
+    });
+    return response.json();
+}
+
+export { login, logout, register, getUserById, updateUser, getAllUsers };

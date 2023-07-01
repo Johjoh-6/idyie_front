@@ -7,9 +7,11 @@ import { get } from "svelte/store";
 
 
 const getAllComments = async (): Promise<CommentGet[]> => {
+    const token = get(userToken);
     const response = await fetch(API_URL + 'api/comment',{
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` },
         credentials: 'include'
     });
     const comments = await response.json();
