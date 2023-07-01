@@ -1,4 +1,5 @@
 import { API_URL } from "$env/static/private";
+import type { Error, Success } from "$lib/model/api";
 import type { User } from "$lib/model/user";
 import { userToken } from "$lib/store/userToken";
 import { get } from "svelte/store";
@@ -67,4 +68,29 @@ const getAllUsers = async (): Promise<User[]> => {
     return response.json();
 }
 
-export { login, logout, register, getUserById, updateUser, getAllUsers };
+const getUser = async (id: number): Promise<User> => {
+    const token = get(userToken);
+    const response = await fetch(API_URL + 'api/users/' + id, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` },
+        credentials: 'include'
+    });
+    return response.json();
+}
+
+const deleteUser = async (id: number): Promise<Error | Success> => {
+    const token = get(userToken);
+    const response = await fetch(API_URL + 'api/users/' + id, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` },
+        credentials: 'include'
+    });
+    if(response.status === 204) {
+        return { message: 'Comment deleted' };
+    }
+    return response.json();
+}
+
+export { login, logout, register, getUserById, updateUser, getAllUsers, deleteUser, getUser };

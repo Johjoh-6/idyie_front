@@ -25,6 +25,7 @@ export type TutorialEdit = {
 	content: string;
 	durate: number;
 	id_category: number;
+	draft?: boolean;
 };
 
 

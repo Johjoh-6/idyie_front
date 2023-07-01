@@ -19,13 +19,16 @@ const getAllComments = async (): Promise<CommentGet[]> => {
 };
 
 const getComment = async (id: number): Promise<CommentGet> => {
+    const token = get(userToken);
     const response = await fetch(API_URL + 'api/comment/' + id,{
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` },
         credentials: 'include'
     });
     const comment = await response.json();
-    return comment;
+    console.log(comment);
+    return comment[0];
 }
 
 const getCommentsByTutorial = async (id: number): Promise<CommentGet[]> => {
@@ -72,6 +75,9 @@ const deleteComment = async (id: number): Promise<Success | Error> => {
         'Authorization': `Bearer ${token}`},
         credentials: 'include'
     });
+    if(response.status === 204) {
+        return { message: 'Comment deleted' };
+    }
     const comment = await response.json();
     return comment;
 }

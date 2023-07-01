@@ -57,6 +57,9 @@ const deleteCategory = async (id: number): Promise<Success | Error> => {
         'Authorization': `Bearer ${token}` },
         credentials: 'include'
     });
+    if(response.status === 204) {
+        return { message: 'Comment deleted' };
+    }
     const category = await response.json();
     return category;
 }
