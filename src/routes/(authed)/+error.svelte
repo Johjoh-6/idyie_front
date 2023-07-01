@@ -14,7 +14,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        /* height: ; */
+        height: 100vh;
     }
     h1{
         font-size: 5rem;
