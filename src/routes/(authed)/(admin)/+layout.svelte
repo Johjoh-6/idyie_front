@@ -42,15 +42,16 @@
 <style lang="scss">
     .dhasboard{
         display: grid;
-        grid-template-columns: 150px 1fr;
-        grid-gap: 1rem;
+        grid-template-columns: 120px 1fr;
+        grid-gap: 0.5rem;
         padding: 10px;
-    
     nav ul{
         list-style: none;
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+        position: sticky;
+        top: 10px;
         li{
         padding: 0.5rem;
         border-radius: var(--br_m);
