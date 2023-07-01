@@ -45,8 +45,8 @@
                         <a href="/add-tutoriel" on:click={handleMenuItemClick}><li>Crée un tutoriel</li></a>
                     {/if}
                 <a href="/profile" on:click={handleMenuItemClick}><li>Profil</li></a>
-               {#if $page.data.user.role == "admin" || $page.data.user.role == "moderator"}
-                <a href="/admin" on:click={handleMenuItemClick}><li>Admin</li></a>
+               {#if $page.data.user.role == "ADMIN" || $page.data.user.role == "MODERATOR"}
+                <a href="/admin-" on:click={handleMenuItemClick}><li>Dashboard</li></a>
                 {/if}
                <form class="logout" method="POST" action="/logout" use:enhance={handleMenuItemClick}><button type="submit">Déconection</button></form>
                {:else}
