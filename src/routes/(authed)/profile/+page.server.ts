@@ -8,10 +8,10 @@ export const load: PageServerLoad = async ({ locals }) => {
     const id = locals.user.id;
     const tutorial = await getTutorialByUser(id);
     const fullUser = await getUserById();
-    console.log(fullUser);
     
 	return {
-		user: fullUser,
+        user: locals.user,
+		userApi: fullUser,
         tutoUser: tutorial
 	};
 };
@@ -58,6 +58,5 @@ export const actions: Actions = {
         const data = await request.formData();
         const id = data.get('id') as string;
         const res = await deleteTutorial(parseInt(id));
-        console.log(res);
     }
 };

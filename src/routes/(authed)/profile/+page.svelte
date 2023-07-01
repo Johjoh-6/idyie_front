@@ -17,7 +17,7 @@
     <title>Mon profil</title>
 </svelte:head>
 
-<h1>Bienvenue {data.user?.username ?? 'Inconnue'}</h1>
+<h1>Bienvenue {data.userApi?.username ?? 'Inconnue'}</h1>
 
 <section class="update_profile">
     <h2>Mettre a jour votre profile</h2>
@@ -27,16 +27,16 @@
     
     <form  action="?/update" method="POST" use:enhance>
         <label for="l_name">Nom</label>
-        <input name="l_name" type="text" value={data.user?.l_name ?? 'Inconnue'} />
+        <input name="l_name" type="text" value={data.userApi?.l_name ?? 'Inconnue'} />
 
         <label for="f_name">Prénom</label>
-        <input name="f_name" type="text" value={data.user?.f_name ?? 'Inconnue'} />
+        <input name="f_name" type="text" value={data.userApi?.f_name ?? 'Inconnue'} />
 
         <label for="username">Username</label>
-        <input name="username" type="text" value={data.user?.username ?? 'Inconnue'} />   
+        <input name="username" type="text" value={data.userApi?.username ?? 'Inconnue'} />   
     
         <label for="email">Email</label>
-        <input name="email" type="email" placeholder="email" value="{data.user?.email}" />
+        <input name="email" type="email" placeholder="email" value="{data.userApi?.email}" />
 
         <label for="password">Mot de passe</label>
         <input name="password" type="password" placeholder="password" />
@@ -45,7 +45,7 @@
         <input name="passwordConfirm" type="password" placeholder="password" />
 
         <label for="avatar">Avatar</label>
-        <input name="avatar" type="url" value={data.user?.avatar}/>
+        <input name="avatar" type="url" value={data.userApi?.avatar}/>
 
 
 

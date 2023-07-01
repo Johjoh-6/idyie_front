@@ -18,7 +18,6 @@ export const load = (async ({ parent, params}) => {
             const viewedTutorials = get(visitedTuto);
             if (!viewedTutorials.includes(tutorial.id)) {
                 const view = await addView(tutorial.id, user.accessToken);
-                console.log(view);
     
                 // Mark this tutorial as viewed
                 visitedTuto.update((tuto) => {
@@ -41,7 +40,6 @@ export const load = (async ({ parent, params}) => {
 export const actions: Actions = {
     create: async ({request}) => {
         const data = await request.formData();
-        console.log(data);
         let commentId: number | null = null;
         if(data.get('id_comment') !== null){
             commentId = parseInt(data.get('id_comment') as string);
@@ -57,9 +55,7 @@ export const actions: Actions = {
             parent_id: commentId !== null ? commentId : undefined,
             id_tutorial: tutorialId
         }
-        console.log(comment);
         const response = await createComment(comment);
-        console.log(response); 
     },
     update: async ({request, params}) => {
     },

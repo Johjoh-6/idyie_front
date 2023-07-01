@@ -20,7 +20,6 @@ export const actions: Actions = {
         const content = data.get('content') as string;
         const id_category = data.get('category') as string;
         const durate = data.get('durate') as string;
-        console.log(title, content, id_category, durate);
         if(!title || !content || !id_category || !durate) {
             return fail(400, { missing: 'Tous les champs sont obligatoires' });
         }
