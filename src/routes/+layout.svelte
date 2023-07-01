@@ -3,7 +3,7 @@
 import HeaderBoxUser from '$lib/components/HeaderBoxUser.svelte';
   import SearchBar from '$lib/components/SearchBar.svelte';
 import type { LayoutData } from './$types';
-    // export let data: LayoutData;
+    export let data: LayoutData;
 
    
 </script>
@@ -24,7 +24,9 @@ import type { LayoutData } from './$types';
     </div>
     <SearchBar />
     <div>
+        {#if !data.user}
         <p class="show_btn">connection</p>
+        {/if}
         <HeaderBoxUser />
     </div>
 </header>
