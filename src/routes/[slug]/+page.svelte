@@ -68,7 +68,7 @@ import type { PageData } from './$types';
     {#each comments as comment}
        <CommentTree {comment} {userId}/>
     {:else}
-        <li>No comments yet</li>
+        <li>Aucun commentaire</li>
     {/each}
     </ul>
         <Dialog bind:show={showDialog}>
