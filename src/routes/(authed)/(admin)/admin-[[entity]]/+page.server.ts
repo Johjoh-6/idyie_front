@@ -1,9 +1,9 @@
-import { error } from '@sveltejs/kit';
+import { error, type Actions, fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { getAllTutorialAdmin } from '$lib/servers/tutorial';
-import { getAllCategory } from '$lib/servers/category';
-import { getAllComments } from '$lib/servers/comments';
-import { getAllUsers } from '$lib/servers/user';
+import { deleteTutorial, getAllTutorialAdmin } from '$lib/servers/tutorial';
+import { deleteCategory } from '$lib/servers/category';
+import { deleteComment, getAllComments } from '$lib/servers/comments';
+import { deleteUser, getAllUsers } from '$lib/servers/user';
 
 interface Entity {
     [key: string]: string;
@@ -101,3 +101,34 @@ export const load = (async ({ params, parent }) => {
        dataList: data
     };
 }) satisfies PageServerLoad;
+
+export const actions: Actions = {
+    delete: async ({ request, params}) => {
+        const selected = params.entity;
+        const data = await request.formData();
+        const id = data.get('id') as string;
+
+        let res;
+        switch(selected) {
+            case "users":
+                res = await deleteUser(parseInt(id));
+                break;
+            case "tutoriels":
+                res = await deleteTutorial(parseInt(id));
+                break;
+            case "categorie":
+                res = await deleteCategory(parseInt(id));
+                break;
+            case "comments":
+                res = await deleteComment(parseInt(id));
+                break;
+            default:
+                throw fail(404, { message: 'Entité indisponible' });
+        }
+        console.log(res);
+
+
+        
+        
+    }
+};
