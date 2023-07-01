@@ -14,6 +14,14 @@ const getAllTutorial = async (): Promise<Tutorial[]> => {
     const tutorials: Tutorial[] = await response.json();
     return tutorials;
 }
+const getAllTutorialAdmin = async (): Promise<Tutorial[]> => {
+    const response = await fetch(API_URL + 'api/tutorial', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    });
+    const tutorials: Tutorial[] = await response.json();
+    return tutorials;
+}
 
 const getTutorial = async (id: number): Promise<Tutorial | Error> => {
     const response = await fetch(API_URL + 'api/tutorial/' + id, {
@@ -97,12 +105,15 @@ const deleteTutorial = async (id: number): Promise<Success | Error> => {
     const token = get(userToken);
     const response = await fetch(API_URL + 'api/tutorial/' + id, {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json', 
-        'Authorization': `Bearer ${token}`},
+        headers: { 'Authorization': `Bearer ${token}`},
         credentials: 'include'
     });
-    const tutorial = await response.json();
-    return tutorial;
+    if(response.status === 204) {
+        return { message: "Tutoriel supprimé" };
+    } else {
+        const error: Error = await response.json();
+        return error;
+    }
 }
 
-export { getAllTutorial, getTutorial, addView, getTutorialByCategory, createTutorial, updateTutorial, deleteTutorial, getTutorialByUser };
+export { getAllTutorial, getTutorial, addView, getTutorialByCategory, createTutorial, updateTutorial, deleteTutorial, getTutorialByUser, getAllTutorialAdmin };
