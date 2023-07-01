@@ -34,9 +34,9 @@ $: length = headers.length;
             {#each headers as head}
                 <th>{head}</th>
             {/each}
-            <th>Voir</th>
-            <th>Éditer</th>
-            <th>Supprimer</th>
+            <th class="action">Voir</th>
+            <th class="action">Éditer</th>
+            <th class="action">Supprimer</th>
         </tr>
     </thead>
     <tbody>
@@ -63,11 +63,11 @@ $: length = headers.length;
                         <td data-cell={key}>{value}</td>
                     {/if}
                 {/each}
-                <td data-cell="Voir"><a href="/{watch}{row.id}">Voir</a></td>
-                <td data-cell="Éditer"><a href="{edit}{row.id}">Editer</a></td>
-                <td data-cell="Supprimer"><form action="{actionDelete}" method="POST" use:enhance>
+                <td data-cell="Voir" class="action"><a href="/{watch}{row.id}">Voir</a></td>
+                <td data-cell="Éditer" class="action"><a href="/{edit}{row.id}">Editer</a></td>
+                <td data-cell="Supprimer" class="action"><form action="{actionDelete}" method="POST" use:enhance>
                     <input type="hidden" name="id" value={row.id} />
-                    <button class="btn btn-outline-danger">Supprimer</button>
+                    <button class="btn btn-outline-danger action">Supprimer</button>
                 </form></td>
             </tr>
         {/each}
@@ -78,6 +78,15 @@ $: length = headers.length;
      table {
         width: 100%;
         border-collapse: collapse;
+    }
+    thead, tbody, tr {
+        width: 100%;
+        display: table;
+        table-layout: fixed;
+    }
+    thead {
+        position: sticky;
+        top: 0;
     }
     th, td {
         padding: 0.3rem;
@@ -133,6 +142,9 @@ $: length = headers.length;
                 z-index: 1;
                 }
             }
+    .action{
+        white-space: nowrap;
+    }
     
     @media screen and (max-width: 800px) {
         td::before{
