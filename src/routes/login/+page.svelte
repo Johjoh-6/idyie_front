@@ -6,6 +6,10 @@
 	export let form: ActionData;
 </script>
 
+<svelte:head>
+    <title>Connection Idyie</title>
+</svelte:head>
+
 <section>
     <h1>Se connecter</h1>
     <form method="POST" action="/login" use:enhance>

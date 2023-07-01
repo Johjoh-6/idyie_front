@@ -5,6 +5,10 @@
 	export let form: ActionData;
 </script>
 
+<svelte:head>
+    <title>S'inscrire sur Idyie</title>
+</svelte:head>
+
 <section>
     <h1>Crée un compte</h1>
     <form method="POST" use:enhance>

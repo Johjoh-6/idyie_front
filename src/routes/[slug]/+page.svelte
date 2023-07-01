@@ -14,6 +14,10 @@ import type { PageData } from './$types';
 
 </script>
 
+<svelte:head>
+    <title>Tutorial : {tuto.title}</title>
+</svelte:head>
+
 <section class="main">
 <div class="head_tuto">
     <h1>{tuto.title}</h1>
@@ -113,7 +117,7 @@ import type { PageData } from './$types';
             display: grid;
             align-items: center;
             gap: 10px;
-            grid-template-columns: 35px 2fr 1fr;
+            grid-template-columns: 35px 3fr 1fr;
             div{
                 display: flex;
                 flex-direction: column;
@@ -151,8 +155,9 @@ import type { PageData } from './$types';
                             }
                     }
                     .category{
+                        text-align: center;
                         padding: 10px;
-                        border-radius: var(--br_sm);
+                        border-radius: var(--br_m);
                         background-color: var(--c_primary);
                         color: var(--c_white);
                     }
@@ -167,6 +172,9 @@ import type { PageData } from './$types';
         }
         margin-top: 10px;
         margin-bottom: 10px;
+        color: var(--text_light);
+
+
     }
     .display_info{
         display: flex;
@@ -191,7 +199,7 @@ import type { PageData } from './$types';
     }
     .add_comment{
         border: 2px solid var(--text_light);
-        border-radius: var(--br_sm);
+        border-radius: var(--br_m);
         padding: 10px;
         background-color: transparent;
         font-size: 1.2rem;
