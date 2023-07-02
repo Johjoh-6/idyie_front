@@ -40,6 +40,7 @@
         <div class="show_menu" >
            <ul>
                <a href="/" on:click={handleMenuItemClick}><li>Accueil</li></a>
+               <a href="/about" on:click={handleMenuItemClick}><li>A propos</li></a>
                {#if $page.data.user}
                     {#if $page.data.user.role !== "USER"}
                         <a href="/add-tutoriel" on:click={handleMenuItemClick}><li>Crée un tutoriel</li></a>
