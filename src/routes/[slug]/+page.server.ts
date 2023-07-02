@@ -5,6 +5,7 @@ import { error, type Actions, fail } from '@sveltejs/kit';
 import { addView } from '$lib/servers/tutorial';
 import { visitedTuto } from '$lib/store/visitedTuto';
 import { get } from 'svelte/store';
+import { createRating, getRatingUserByTutorial, updateRating } from '$lib/servers/rating';
 
 
 export const load = (async ({ parent, params}) => {
@@ -28,11 +29,12 @@ export const load = (async ({ parent, params}) => {
     }
 
     const comments = await getCommentsByTutorial(tutorial.id);
-
+    const rating = await getRatingUserByTutorial(tutorial.id);
     return {
         user: user,
         tutorial: tutorial,
-        comments: comments
+        comments: comments,
+        ratingTuto: rating
     };
 }) satisfies PageServerLoad;
 
@@ -57,6 +59,27 @@ export const actions: Actions = {
         }
         const response = await createComment(comment);
     },
-    update: async ({request, params}) => {
+    addRating: async ({request}) => {
+        const data = await request.formData();
+        const rating_value = parseInt(data.get('rating_value') as string);
+        const tutorialId = parseInt(data.get('tutorialId') as string);
+        if(!rating_value || !tutorialId) return fail(400, { missing: 'La réponse ne doit pas être vide' });
+        const rat = {
+            rating_value: rating_value,
+            id_tutorial: tutorialId
+        }
+        const response = await createRating(rat);
     },
+    updateRating: async ({request}) => {
+        const data = await request.formData();
+        const rating_value = parseInt(data.get('rating_value') as string);
+        const id = parseInt(data.get('id') as string);
+        if(!rating_value || !id) return fail(400, { missing: 'La réponse ne doit pas être vide' });
+     
+        const rat = {
+            rating_value: rating_value,
+        }
+        const response = await updateRating(id ,rat);
+
+    }
 }

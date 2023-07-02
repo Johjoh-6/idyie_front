@@ -11,7 +11,7 @@ import type { PageData } from './$types';
     const userId = data.user?.id ?? 0;
     let { date, time} = transformDate(tuto.created_at);
     $: showDialog = false;
-
+    $: showRating = false;
 </script>
 
 <svelte:head>
@@ -53,6 +53,37 @@ import type { PageData } from './$types';
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.0006 18.26L4.94715 22.2082L6.52248 14.2799L0.587891 8.7918L8.61493 7.84006L12.0006 0.5L15.3862 7.84006L23.4132 8.7918L17.4787 14.2799L19.054 22.2082L12.0006 18.26Z"></path></svg>
     </div>
 </div>
+<button class="rating" on:click={
+    () => {
+        if(data.user == null) {
+            goto('/login');
+        }
+        showRating = true;
+    }
+}>
+    Mettre une note
+</button>
+<Dialog bind:show={showRating}>
+    <div class="header_dialog" slot="header">
+        <h3>Mettre une note</h3>
+    </div>
+    <div slot="body">
+        <form class="form_rating" action="{data.ratingTuto?.value !== undefined ? "?/updateRating" : "?/addRating"}" method="POST" >
+            <input type="hidden" name="id" value={data.ratingTuto.id}>
+            <input type="hidden" name="tutorialId" value="{tuto.id}">
+            <label for="rating_value">Note</label>
+            <input type="number" name="rating_value" id="rating_value" min="0" max="5" step="1" required value="{data.ratingTuto?.value ?? 0}">
+            <button type="submit">
+                Noté
+            </button>
+        </form>
+    </div>
+    <div class="footer_dialog" slot="footer">
+        <button on:click={() => showRating = false}>
+            Fermer
+        </button>
+    </div>
+</Dialog>
 <button class="add_comment" on:click={
     () => {
         if(data.user == null) {
@@ -197,12 +228,19 @@ import type { PageData } from './$types';
             }
         }
     }
-    .add_comment{
+    .add_comment, .rating{
         border: 2px solid var(--text_light);
         border-radius: var(--br_m);
         padding: 10px;
         background-color: transparent;
         font-size: 1.2rem;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+        &:hover{
+            background-color: var(--c_primary);
+            color: var(--c_white);
+            border: 2px solid var(--c_primary);
+        }
     }
     .comment_section{
         padding: 10px;
@@ -214,18 +252,28 @@ import type { PageData } from './$types';
         list-style: none;
         gap: 10px;
     }
-    .header_dialog{
+   
+}
+}
+.header_dialog{
             font-size: 1.5rem;
             font-weight: bold;
             text-align: center;
             color: var(--c_primary);
           }
-          .form_comment{
+          .form_comment, .form_rating{
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
                 textarea{
                     resize: none;
+                    border: 1px solid var(--c_grey);
+                    border-radius: var(--br_sm);
+                    padding: 5px;
+                    outline: none;
+                    font-size: 0.8rem;
+                }
+                input{
                     border: 1px solid var(--c_grey);
                     border-radius: var(--br_sm);
                     padding: 5px;
@@ -262,6 +310,4 @@ import type { PageData } from './$types';
                 }
             }
           }
-}
-}
 </style>
