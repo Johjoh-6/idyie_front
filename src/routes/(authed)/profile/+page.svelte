@@ -44,6 +44,7 @@
         <label for="passwordConfirm">Confirmer le mot de passe</label>
         <input name="passwordConfirm" type="password" placeholder="password" />
 
+        <img src="{data.userApi?.avatar}" alt="avatar">
         <label for="avatar">Avatar</label>
         <input name="avatar" type="url" value={data.userApi?.avatar}/>
 
@@ -129,6 +130,13 @@ h1{
             cursor: pointer;
             background-color: var(--c_primary);
             color: var(--c_white);
+        }
+        img{
+            width: 100px;
+            height: 100px;
+            border-radius: var(--br_round);
+            margin-bottom: 1rem;
+
         }
     }
 }
