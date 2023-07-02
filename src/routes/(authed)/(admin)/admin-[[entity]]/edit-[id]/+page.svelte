@@ -5,7 +5,6 @@
 import type { PageData } from './$types';
     
     export let data: PageData;
-    console.log(" data " ,data.selected);
     let content = "";
 
     if ("content" in data.selected) {

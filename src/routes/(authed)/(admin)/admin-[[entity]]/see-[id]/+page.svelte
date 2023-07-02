@@ -2,7 +2,6 @@
     import type { PageData } from './$types';
     
     export let data: PageData;
-    console.log(data.selected);
 </script>
 
 <!-- render all key and value in the data.selected -->

@@ -42,7 +42,6 @@ export const actions: Actions = {
         const selected = params.entity;
         const data = await request.formData();
         const id = data.get('id') as string;
-        console.log("data form", data);
         let res;
         switch(selected) {
             case "users":
@@ -81,7 +80,6 @@ export const actions: Actions = {
             default:
                 throw fail(404, { message: 'Entité indisponible' });
         }
-        console.log(res);
         throw redirect(303, `/admin-${selected}`);
     },
 };

@@ -94,8 +94,6 @@ export const load = (async ({ params, parent }) => {
             throw error(404, 'Entity not found');
     }
 
-    console.log(data);
-
     return {
        entity: entitySelected,
        dataList: data
@@ -125,10 +123,5 @@ export const actions: Actions = {
             default:
                 throw fail(404, { message: 'Entité indisponible' });
         }
-        console.log(res);
-
-
-        
-        
     }
 };
