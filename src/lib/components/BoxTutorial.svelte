@@ -68,7 +68,7 @@ let { date, time} = transformDate(tuto.created_at);
         grid-template-columns: 1fr 5fr 1fr;
         grid-template-areas:
           "avatar username date"
-          "title title ."
+          "title title title"
           "content content content"
           "categorie rating comment";
           border-radius: var(--br_sm);
