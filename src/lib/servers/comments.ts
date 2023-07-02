@@ -27,7 +27,6 @@ const getComment = async (id: number): Promise<CommentGet> => {
         credentials: 'include'
     });
     const comment = await response.json();
-    console.log(comment);
     return comment[0];
 }
 

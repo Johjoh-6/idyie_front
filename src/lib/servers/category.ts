@@ -2,6 +2,7 @@ import { page } from "$app/stores";
 import { API_URL } from "$env/static/private";
 import type { Error, Success } from "$lib/model/api";
 import type { Category } from "$lib/model/categorie";
+import { userToken } from "$lib/store/userToken";
 import { get } from "svelte/store";
 
 
@@ -24,7 +25,7 @@ const getCategory = async (id: number): Promise<Category> => {
 }
 
 const createCategory = async (name: string, parent?: number): Promise<Category> => {
-    const token = get(page).data.user.accessToken;
+    const token = get(userToken);
     const response = await fetch(API_URL + 'api/categorie', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json',
@@ -37,7 +38,7 @@ const createCategory = async (name: string, parent?: number): Promise<Category> 
 }
 
 const updateCategory = async (id: number, name: string, parent?: number): Promise<Category> => {
-    const token = get(page).data.user.accessToken;
+    const token = get(userToken)
     const response = await fetch(API_URL + 'api/categorie/' + id, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json',
@@ -50,7 +51,7 @@ const updateCategory = async (id: number, name: string, parent?: number): Promis
 }
 
 const deleteCategory = async (id: number): Promise<Success | Error> => {
-    const token = get(page).data.user.accessToken;
+    const token = get(userToken);
     const response = await fetch(API_URL + 'api/categorie/' + id, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json',
