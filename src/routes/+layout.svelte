@@ -22,10 +22,10 @@ import type { LayoutData } from './$types';
         </a>
         <HeaderBoxCategorie />
     </div>
-    <SearchBar />
+    <SearchBar tutorials={data.tutorials}/>
     <div>
         {#if !data.user}
-        <p class="show_btn">connection</p>
+        <a href="/login" class="show_btn">connection</a>
         {/if}
         <HeaderBoxUser />
     </div>
@@ -35,7 +35,7 @@ import type { LayoutData } from './$types';
     <slot />
 </main>
 
-<style>
+<style lang="scss">
     :global(html, body){
         margin: 0;
         padding: 0;
@@ -71,6 +71,13 @@ import type { LayoutData } from './$types';
     color: var(--c_white);
     border-radius: var(--br_m);
     padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;  
+    height: auto;
+    &:hover{
+        background-color: var(--c_grey);
+        color: var(--c_primary);
+    }
   }
 
   @media (max-width: 768px) {
