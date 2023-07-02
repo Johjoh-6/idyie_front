@@ -8,10 +8,8 @@ export const filteredTutorials = derived(
     [tutorialsList, searchTerm],
     ([$tutorials, $searchTerm]) => {
       if($searchTerm.trim() === "") {
-        console.info("No search term");
         return $tutorials;
       }
-      console.info("Search term", $searchTerm);
       return $tutorials?.filter(tutorial => tutorial.title.toLowerCase().includes($searchTerm.toLowerCase())) || []
     }
 );
