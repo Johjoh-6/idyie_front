@@ -1,11 +1,31 @@
 <!-- SearchBar.svelte -->
-<script>
+<script lang="ts">
+ 
     import Icon from './Icon.svelte';
+  import { tutorialsList } from '$lib/store/tutorials';
+  import { onMount } from 'svelte';
+  import type { Tutorial } from '$lib/model/tutorial';
+  import { searchTerm } from '$lib/store/searchTerm';
+  import { goto } from '$app/navigation';
+
+    export let tutorials: Tutorial[] = [];
+
+
+onMount(async () => {
+    tutorialsList.set(tutorials);
+  });
+
+  $: {
+    if($searchTerm !== ""){
+      goto('/');
+    }
+  }
+
   </script>
   
   <div class="search-container">
     <Icon name="search" color={"--c_grey_dark"} />
-    <input type="text" placeholder="Search..." class="search-input" />
+    <input type="text" placeholder="Search..." class="search-input" bind:value={$searchTerm}/>
   </div>
   
   <style>
