@@ -14,7 +14,7 @@ export const actions: Actions = {
         const email = data.get('email') as string;
         const password = data.get('password') as string;
 
-        if(!email || !password) return fail(400, { email, password, missing: 'Email or password are missing.' });
+        if(!email || !password) return fail(400, { email, password, missing: 'Email ou password sont manquant.' });
 
        const response = await login(email, password);
         

@@ -13,7 +13,7 @@
 <section>
     <h1>Se connecter</h1>
     <form method="POST" action="/login" use:enhance>
-        {#if form?.missing}<p class="error">Invalid credentials!</p>{/if}
+        {#if form?.missing}<p class="error">{form.missing}</p>{/if}
         <label for="email">Email : </label>
         <input name="email" type="email" placeholder="test@gmail.com"/>
         <label for="password">Mot de passe : </label>
