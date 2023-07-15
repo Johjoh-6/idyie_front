@@ -1,5 +1,6 @@
 <script lang="ts">
   import { enhance } from '$app/forms';
+  import ReturnBtn from '$lib/components/ReturnBtn.svelte';
     import Tiny from '$lib/components/Tiny.svelte';
   import type { Tutorial } from '$lib/model/tutorial';
 import type { PageData } from './$types';
@@ -17,6 +18,7 @@ import type { PageData } from './$types';
   }
 </script>
 
+<ReturnBtn />
 <!-- get all field and value and prepare a form -->
 <form method="POST" use:enhance>
     {#each Object.entries(data.selected) as [key, value]}

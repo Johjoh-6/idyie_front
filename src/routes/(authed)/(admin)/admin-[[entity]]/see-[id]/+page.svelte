@@ -1,11 +1,12 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import ReturnBtn from '$lib/components/ReturnBtn.svelte';
     import type { PageData } from './$types';
     
     export let data: PageData;
 </script>
 
-
+<ReturnBtn />
 <section>
 {#each Object.entries(data.selected) as [key, value]}
 {#if key !== "password" && key !== "created_at" && key !== "updated_at" && key !== "date" && key !== "avg_rating" && key !== "user" && key !== "id_category_parent" && key !== "tutorial"}

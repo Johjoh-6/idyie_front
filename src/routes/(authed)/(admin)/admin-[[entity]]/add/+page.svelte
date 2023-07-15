@@ -1,7 +1,6 @@
 <script lang="ts">
     import { enhance } from '$app/forms';
-      import Tiny from '$lib/components/Tiny.svelte';
-    import type { Tutorial } from '$lib/model/tutorial';
+  import ReturnBtn from '$lib/components/ReturnBtn.svelte';
   import type { ActionData, PageData } from './$types';
       
       export let data: PageData;
@@ -10,6 +9,7 @@
 
   </script>
   
+  <ReturnBtn />
   <!-- get all field and value and prepare a form -->
   <form method="POST" use:enhance>
     <label for="name">Nom</label>
