@@ -72,7 +72,6 @@ import type {  ActionData } from './$types';
         border: 1px solid var(--c_primary);
         border-radius: 5px;
         font-size: clamp(1rem, 3vw, 1.5rem);
-        color: var(--c_primary);
       }
       button{
         padding: 0.5rem;
