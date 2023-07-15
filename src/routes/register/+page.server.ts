@@ -16,9 +16,9 @@ export const actions: Actions = {
         const password = data.get('password') as string;
         const confirm = data.get('password_confirm') as string;
 
-        if(password !== confirm) return fail(400, { password, confirm, mismatch: 'Passwords do not match.' });
+        if(password !== confirm) return fail(400, { password, confirm, mismatch: 'Les mots de passe ne corresponde pas.' });
 
-        if(!email || !password) return fail(400, { email, password, missing: 'Email or password are missing.' });
+        if(!email || !password) return fail(400, { email, password, missing: 'Email ou mots de passe sont obligatoire.' });
 
         const response = await fetch(API_URL + 'api/register', {
             method: 'POST',
