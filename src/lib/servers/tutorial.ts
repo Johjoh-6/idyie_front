@@ -7,7 +7,7 @@ import { get } from "svelte/store";
 
 
 const getAllTutorial = async (): Promise<Tutorial[]> => {
-    const response = await fetch(API_URL + 'api/tutorial?draft=true', {
+    const response = await fetch(`${API_URL}api/tutorial?draft=true`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     });
@@ -77,6 +77,7 @@ const getTutorialByCategory = async (cat: number): Promise<Tutorial[]> => {
 
 const createTutorial = async (tutoCreate: TutorialEdit): Promise<TutorialResponse> => {
     const token = get(userToken);
+    tutoCreate.content = cleanXss(tutoCreate.content);
     const response = await fetch(API_URL + 'api/tutorial', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json',
@@ -90,6 +91,7 @@ const createTutorial = async (tutoCreate: TutorialEdit): Promise<TutorialRespons
 
 const updateTutorial = async (id: number, tutoUpdate: TutorialEdit): Promise<TutorialResponse> => {
     const token = get(userToken);
+    tutoUpdate.content = cleanXss(tutoUpdate.content);
     const response = await fetch(API_URL + 'api/tutorial/' + id, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 
@@ -115,5 +117,23 @@ const deleteTutorial = async (id: number): Promise<Success | Error> => {
         return error;
     }
 }
+
+const cleanXss = (content: string): string => {
+    // Array of unwanted HTML tags
+    const unwantedTags = [ "script", "a", "body", "iframe", "object", "embed", "form" ];
+    unwantedTags.forEach((tag) => {
+      const tagRegex = new RegExp(`<${tag}(?![\\w-])[^>]*>.*?</${tag}(?![\\w-])>`, "gi");
+      content = content.replace(tagRegex, "");
+    });
+    // Array of unwanted HTML attributes
+    const unwantedAttrs = [ "onload", "onunload", "onclick", "ondblclick", "onmousedown", "onmouseup", "onmouseover", "onmousemove", "onmouseout", "onfocus", "onblur", "onkeypress", "onkeydown", "onkeyup", "onsubmit", "onreset", "onselect", "onchange" ];
+    unwantedAttrs.forEach((attr) => {
+      const attrRegex = new RegExp(`${attr}="[^"]*"`, "gi");
+      content = content.replace(attrRegex, "");
+    });
+  
+    return content;
+  }
+  
 
 export { getAllTutorial, getTutorial, addView, getTutorialByCategory, createTutorial, updateTutorial, deleteTutorial, getTutorialByUser, getAllTutorialAdmin };
