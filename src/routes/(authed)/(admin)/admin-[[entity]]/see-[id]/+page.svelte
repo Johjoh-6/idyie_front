@@ -29,5 +29,8 @@
     p{
         margin-bottom: 0.5rem;
         text-transform: capitalize;
+        max-width: 100%;
+        display: flex;
+        word-break: break-all;
     }
 </style>
