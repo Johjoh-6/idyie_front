@@ -110,8 +110,9 @@
                 .logout{
                     cursor: pointer;
                     padding: 10px;
+    
                     &:hover{
-                        background-color: var(--c_primary);
+                        background-color: var(--c_red);
                         color: var(--c_grey);
                         & > * {
                             color: var(--c_grey);
@@ -120,7 +121,8 @@
                     button {
                         background-color: transparent;
                         border: none;
-                        color: var(--text_light);
+                        color: var(--c_red);
+                        font-weight: bold;
                         cursor: pointer;
                         font-size: 16px;
                         &:hover{
