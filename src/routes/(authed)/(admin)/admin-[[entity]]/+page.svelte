@@ -1,9 +1,46 @@
 <script lang="ts">
+  import Icon from '$lib/components/Icon.svelte';
     import Table from '$lib/components/Table.svelte';
   import { tutorialsList } from '$lib/store/tutorials';
 import type { PageData } from './$types';
+  import { afterNavigate } from '$app/navigation';
     
     export let data: PageData;
+
+    let search = "";
+
+    const filteredList = () => {
+        console.log(search);
+        if (search === "") {
+            list =  data.dataList;
+        } else {
+            switch(data.entity){
+                case "users":
+                    list =  data.dataList.filter((user: any) => {
+                        return  user.pseudo.toLowerCase().includes(search.toLowerCase());
+                    });
+                case "categorie":
+                    list =  data.dataList.filter((cat: any) => {
+                        return  cat.nom.toLowerCase().includes(search.toLowerCase());
+                    });
+                case "tutoriels":
+                    list =  data.dataList.filter((tuto: any) => {
+                        // filter by title
+                        const title = tuto.titre.toLowerCase().includes(search.toLowerCase());
+                        // filter by auteur
+                        const author = tuto.auteur.toLowerCase().includes(search.toLowerCase());
+                        // filter by categorie
+                        const categorie = tuto.categorie.toLowerCase().includes(search.toLowerCase());
+                        return  title || author || categorie;
+                    });
+            }
+        }
+    };
+    afterNavigate(()=> {
+        search = "";
+    })
+    $:list = data.dataList;
+
 </script>
 
 <h1>{data.entity}</h1>
@@ -23,7 +60,13 @@ import type { PageData } from './$types';
         </div>
         {/if}
     </div>
-    <Table data={data.dataList}  actionDelete={"?/delete"} watch={`admin-${data.entity}/see-`} edit={`admin-${data.entity}/edit-`}/>
+    
+  <div class="search-container">
+    <Icon name="search" color={"--c_grey_dark"} />
+    <input type="text" placeholder="Rechercher..." class="search-input" bind:value={search} on:change={filteredList}/>
+  </div>
+  
+    <Table data={list}  actionDelete={"?/delete"} watch={`admin-${data.entity}/see-`} edit={`admin-${data.entity}/edit-`}/>
 {:else}
 <section>
 
@@ -112,5 +155,34 @@ import type { PageData } from './$types';
                 color: var(--c_primary);
             }
         }
+    }
+    .search-container {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 500px;
+      background-color: var(--c_grey);
+      border: none;
+      border-radius: var(--br_m);
+      overflow: hidden;
+      padding: 1px 9px;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+  
+    .search-input {
+      width: 100%;
+      height: 40px;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      padding-left: 10px;
+      color: var(--c_grey_dark);
+    }
+  
+    @media (max-width: 768px) {
+      .search-container {
+        max-width: 100%;
+      }
     }
 </style>
