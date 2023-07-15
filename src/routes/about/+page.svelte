@@ -21,6 +21,8 @@
 
     <p>Chez Idyie, nous valorisons la qualité du contenu et l'expérience des utilisateurs. Chaque guide et tutoriel proposé est soigneusement examiné par notre équipe avant d'être publié sur la plateforme. Nous encourageons également les utilisateurs à interagir, à poser des questions et à offrir des commentaires constructifs pour favoriser un environnement d'apprentissage collaboratif.</p>
 
+    <p>Si vous souhaitez créer des tutoriels ou guides pour la communauté, vous devais d'abord faire une demande a l'administration. Envoyer votre demande a <a href="mailto:{adminMail}">{adminMail}</a> avec l'intituler "Je souahite devenir Rédacteur".</p>
+
     <p>Nous sommes déterminés à maintenir un espace sûr et respectueux pour tous nos utilisateurs. Si vous rencontrez un guide ou un tutoriel inapproprié, nous vous encourageons vivement à nous le signaler. Pour signaler un contenu inapproprié, veuillez envoyer le lien du guide concerné ainsi qu'une description détaillée du problème à notre adresse e-mail dédiée à cet effet : <a href="mailto:{adminMail}">{adminMail}</a>. Notre équipe examinera rapidement votre signalement et prendra les mesures nécessaires pour résoudre la situation.</p>
 
     <p>Nous espérons que vous trouverez Idyie enrichissant et inspirant. Rejoignez-nous dès aujourd'hui et contribuez à notre communauté florissante de partage de connaissances. Ensemble, nous pouvons repousser les frontières de l'apprentissage et réaliser des merveilles !</p>
