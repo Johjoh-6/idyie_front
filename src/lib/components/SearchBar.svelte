@@ -25,7 +25,7 @@ onMount(async () => {
   
   <div class="search-container">
     <Icon name="search" color={"--c_grey_dark"} />
-    <input type="text" placeholder="Search..." class="search-input" bind:value={$searchTerm}/>
+    <input type="text" placeholder="Rechercher..." class="search-input" bind:value={$searchTerm}/>
   </div>
   
   <style>
