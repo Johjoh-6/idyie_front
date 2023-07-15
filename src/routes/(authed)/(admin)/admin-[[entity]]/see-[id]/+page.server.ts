@@ -17,8 +17,6 @@ export const load = (async ({params}) => {
     let selected;
     switch(entity) {
         case "users":
-            const user = await getUser(parseInt(id));
-            console.log(user);
             selected = await getUser(parseInt(id));
             break;
         case "tutoriels":
