@@ -20,9 +20,23 @@ export const actions: Actions = {
         const content = data.get('content') as string;
         const id_category = data.get('category') as string;
         const durate = data.get('durate') as string;
-        if(!title || !content || !id_category || !durate) {
-            return fail(400, { missing: 'Tous les champs sont obligatoires' });
+    
+        let errors: any = {};
+        
+        if(!title)  errors.title = "Un titre est obligatoire";
+        if(title.length < 3)  errors.title = "Le titre doit faire au moins 3 caractères";
+        if(title.length > 255)  errors.title = "Le titre doit faire au plus 255 caractères";
+        if(content.length < 3)  errors.content = "Le contenu doit faire au moins 3 caractères";
+        if(!content)  errors.content = "Un contenu est obligatoire";
+        if(!durate)  errors.durate = "La durée est obligatoire";
+        if(!id_category)  errors.id_category = "La catégorie est obligatoire";
+        
+        if(Object.keys(errors).length > 0) {
+            return fail(400, errors);
         }
+
+        
+
         const tuto = {
             title: title,
             content: content,
