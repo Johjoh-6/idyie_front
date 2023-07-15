@@ -69,7 +69,7 @@ import type { PageData } from './$types';
             {/if}
         {/if}
     {/each}
-    <button type="submit">Save</button>
+    <button type="submit">Enregistrer</button>
 </form>
 
 <style lang="scss">

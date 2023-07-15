@@ -32,7 +32,7 @@ export const actions: Actions = {
             return fail(400, { message: "Les mots de passe ne correspondent pas." });
         }else{
             if(password.length > 0 && password.length < 8) { 
-                return fail(400, { message: "Le mot de passe doit contenir au moins 8 caractères." });
+                return fail(400, { message: "Le mots de passe doit contenir au moins 8 caractères." });
             } else {
                 passwordVerify = password;
             }

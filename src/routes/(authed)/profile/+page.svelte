@@ -38,11 +38,11 @@
         <label for="email">Email</label>
         <input name="email" type="email" placeholder="email" value="{data.userApi?.email}" />
 
-        <label for="password">Mot de passe</label>
-        <input name="password" type="password" placeholder="password" />
+        <label for="password">Mots de passe</label>
+        <input name="password" type="password" placeholder="Mots de passe" />
 
-        <label for="passwordConfirm">Confirmer le mot de passe</label>
-        <input name="passwordConfirm" type="password" placeholder="password" />
+        <label for="passwordConfirm">Confirmer le mots de passe</label>
+        <input name="passwordConfirm" type="password" placeholder="Confirmer le mots de passe" />
 
         <img src="{data.userApi?.avatar}" alt="avatar">
         <label for="avatar">Avatar</label>
@@ -50,7 +50,7 @@
 
 
 
-        <button class="btn btn-outline-primary">Update</button>
+        <button class="btn btn-outline-primary">Mettre a jour</button>
     </form>
 </section>
 
