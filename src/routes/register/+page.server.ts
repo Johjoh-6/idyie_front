@@ -15,7 +15,8 @@ export const actions: Actions = {
         const email = data.get('email') as string;
         const password = data.get('password') as string;
         const confirm = data.get('password_confirm') as string;
-
+        const cgu = data.get('cgu') as string;
+        if(cgu !== "on") return fail(400, { cgu: 'Vous devez accepter les CGU.' });
         if(password !== confirm) return fail(400, { password, confirm, mismatch: 'Les mots de passe ne corresponde pas.' });
 
         if(!email || !password) return fail(400, { email, password, missing: 'Email ou mots de passe sont obligatoire.' });

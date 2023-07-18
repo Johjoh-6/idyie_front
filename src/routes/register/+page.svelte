@@ -22,6 +22,11 @@
         <label for="password_confirm">Confirmer le mots de passe : </label>
         <input name="password_confirm" type="password" />
         {#if form?.mismatch}<p class="error">{form.mismatch}</p>{/if}
+        <div id="box_cgu">
+            <label for="cgu"><a href="/cgu">J'accepte les CGU</a></label>
+            <input type="checkbox" name="cgu" id="cgu" />
+        </div>
+        {#if form?.cgu}<p class="error">{form.cgu}</p>{/if}
         <button>S'enregistrer</button>
     </form>
 </section>
@@ -74,7 +79,24 @@
                     color: var(--c_primary);
                 }
             }
+            #box_cgu{
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                label{
+                    font-weight: normal;
+                    color: var(--c_primary);
+                }
+                input{
+                    width: 20px;
+                    height: 20px;
+                }
+            }
 
+        }
+        .error{
+            color: var(--c_red);
+            font-weight: bold;
         }
     }
 </style>
