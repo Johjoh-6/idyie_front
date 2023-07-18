@@ -14,6 +14,7 @@
     <h1>Se connecter</h1>
     <form method="POST" action="/login" use:enhance>
         {#if form?.missing}<p class="error">{form.missing}</p>{/if}
+        {#if form?.error}<p class="error">{form.error}</p>{/if}
         <label for="email">Email : </label>
         <input name="email" type="email" placeholder="test@gmail.com"/>
         <label for="password">Mot de passe : </label>
@@ -71,6 +72,10 @@
                 }
             }
 
+        }
+        .error{
+            color: var(--c_red);
+            font-weight: bold;
         }
     }
 </style>

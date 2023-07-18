@@ -17,9 +17,11 @@ export const actions: Actions = {
         if(!email || !password) return fail(400, { email, password, missing: 'Email ou password sont manquant.' });
 
        const response = await login(email, password);
-        
+        console.log(response);
+        const json = await response.json();
+        console.log(json);
         const authToken = response.headers.get('set-cookie');
-        if(!authToken) throw new Error('Login failed');
+        if(!authToken) return fail (400, {error: 'Connection échoué'});
         const cookieName = authToken.substring(0, authToken.indexOf('='));
         const cookieValue = authToken.substring(authToken.indexOf('=') + 1, authToken.indexOf(';'));
     
