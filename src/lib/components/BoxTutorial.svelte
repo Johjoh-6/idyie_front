@@ -177,6 +177,9 @@ let { date, time} = transformDate(tuto.created_at);
       grid-area: title;
       font-weight: 600;
       font-size: clamp(1.2rem, 1.5vw, 1.8rem);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .content {
       grid-area: content;
