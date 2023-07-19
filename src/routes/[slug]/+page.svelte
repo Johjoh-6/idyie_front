@@ -197,7 +197,7 @@ import type { PageData } from './$types';
     }
     .tutorial_content{
         padding: 10px;
-        img{
+        img, picture{
             width: 100%;
             height: auto;
         }
