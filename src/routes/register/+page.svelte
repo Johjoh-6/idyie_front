@@ -14,7 +14,7 @@
     <form method="POST" use:enhance>
         {#if form?.missing}<p class="error">{form.missing}</p>{/if}
         <label for="username">Nom d'utilisateur</label>
-        <input name="username" type="text" placeholder="username" />
+        <input name="username" type="text" placeholder="pseudo" />
         <label for="email">Email : </label>
         <input name="email" type="email" placeholder="test@gmail.com"/>
         <label for="password">Mot de passe : </label>
@@ -28,6 +28,7 @@
         </div>
         {#if form?.cgu}<p class="error">{form.cgu}</p>{/if}
         <button>S'enregistrer</button>
+        {#if form?.i}<p class="error">{form.i}</p>{/if}
     </form>
 </section>
 

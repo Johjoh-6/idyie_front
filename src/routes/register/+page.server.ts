@@ -26,9 +26,9 @@ export const actions: Actions = {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password, username }),
           });
-        
+        console.log(response);
         const authToken = response.headers.get('set-cookie');
-        if(!authToken) throw new Error('Login failed');
+        if(!authToken) return fail (400, {i :'Inscription échoué'});
         const cookieName = authToken.substring(0, authToken.indexOf('='));
         const cookieValue = authToken.substring(authToken.indexOf('=') + 1, authToken.indexOf(';'));
     
