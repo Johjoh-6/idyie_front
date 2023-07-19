@@ -1,4 +1,4 @@
-import { error, fail, json } from '@sveltejs/kit';
+import { error, fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { deleteTutorial, getTutorialByUser } from '$lib/servers/tutorial';
 import { getUserById, updateUser } from '$lib/servers/user';
@@ -49,8 +49,9 @@ export const actions: Actions = {
         };
 
         const res = await updateUser(user);
+        console.log(res);
         if (res.username){
-            return json({success: "Votre compte a bien été modifié"});
+            return {success: "Votre compte a bien été modifié"};
         } 
 
     },

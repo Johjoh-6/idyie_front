@@ -36,6 +36,7 @@ export const actions: Actions = {
             durate: parseInt(durate)
         };
         const res = await updateTutorial(parseInt(idTuto) ,tuto);
+        console.log(res);
         throw redirect(303, '/profile');
     }
 }

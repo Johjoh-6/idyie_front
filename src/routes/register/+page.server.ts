@@ -26,7 +26,8 @@ export const actions: Actions = {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password, username }),
           });
-        console.log(response);
+        const json = await response.json();
+        if('error' in json) return fail(400, { i: json.error });
         const authToken = response.headers.get('set-cookie');
         if(!authToken) return fail (400, {i :'Inscription échoué'});
         const cookieName = authToken.substring(0, authToken.indexOf('='));

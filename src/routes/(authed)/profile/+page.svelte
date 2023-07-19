@@ -51,6 +51,8 @@
 
 
         <button class="btn btn-outline-primary">Mettre a jour</button>
+        {#if form?.message}<p class="error">{form.message}</p>{/if}
+        {#if form?.success}<p class="success">{form.success}</p>{/if}
     </form>
 </section>
 
@@ -215,5 +217,14 @@ h1{
             background-color: var(--box_light);
         }
     }
+}
+.error{
+    color: var(--c_red);
+    padding: 1rem;
+
+}
+.success{
+    color: var(--c_green);
+    padding: 1rem;
 }
 </style>
