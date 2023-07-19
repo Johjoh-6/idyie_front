@@ -3,7 +3,7 @@ import type { PageServerLoad } from './$types';
 import { getTutorial, updateTutorial } from '$lib/servers/tutorial';
 import { getCategory, updateCategory } from '$lib/servers/category';
 import { getComment, updateComment } from '$lib/servers/comments';
-import { getUser } from '$lib/servers/user';
+import { getUser, updateUser } from '$lib/servers/user';
 
 export const load = (async ({params}) => {
     const { entity, id } = params;
@@ -45,7 +45,26 @@ export const actions: Actions = {
         let res;
         switch(selected) {
             case "users":
-                // res = await deleteUser(parseInt(id));
+                const l_name = data.get('l_name') as string;
+                const f_name = data.get('f_name') as string;
+                const email = data.get('email') as string;
+                const username = data.get('username') as string;
+                const avatar = data.get('avatar') as string;
+                const role = data.get('role') as string;
+                const ban = Boolean(data.get('ban'));
+
+                const user = {
+                    id: parseInt(id),
+                    l_name,
+                    f_name,
+                    email,
+                    username,
+                    avatar,
+                    role,
+                    ban,
+                };
+                res = await updateUser(user, true);
+                console.log(res);
                 break;
             case "tutoriels":
                 const title = data.get('title') as string;
