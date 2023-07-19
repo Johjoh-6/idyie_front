@@ -45,9 +45,10 @@ const getUserById = async (): Promise<User> => {
     return response.json();
 }
 
-const updateUser = async (user: User): Promise<User> => {
+const updateUser = async (user: User, admin = false): Promise<User> => {
     const token = get(userToken);
-    const response = await fetch(API_URL + 'api/users/me', {
+    const url = admin ? API_URL + 'api/users/' + user.id : API_URL + 'api/users/me';
+    const response = await fetch(url, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}` },
@@ -56,7 +57,6 @@ const updateUser = async (user: User): Promise<User> => {
     });
     return response.json();
 }
-
 const getAllUsers = async (): Promise<User[]> => {
     const token = get(userToken);
     const response = await fetch(API_URL + 'api/users', {
